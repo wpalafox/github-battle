@@ -1,6 +1,6 @@
 var React = require('react');
 var PropTypes = require('prop-types');
-var api = ('../utils/api');
+var api = require('../utils/api');
 
 function SelectLanguage (props){
  //A stateless functional compoenent

@@ -1,32 +1,33 @@
 var React = require('react');
 var PropTypes = require('prop-types');
-
+var api = ('../utils/api');
 
 function SelectLanguage (props){
  //A stateless functional compoenent
- const languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python'];
+ var languages = ['All', 'Javascript', 'Ruby', 'Java', 'CSS', 'Python'];
   return (
-	
-	<ul className='languages'>
+  
+  <ul className='languages'>
 
-	    {languages.map(function(lang){
+      {languages.map(function(lang){
           
             return (
-            	//<p>Selected Language: {this.state.selectedLanguage}</p>
-            	<li 
-            	  style={lang === props.selectedLanguage ? {color: '#d0021b'}: null}
-            	  onClick={props.onSelect.bind(null, lang)}
-            	  key={lang}>
-            	  
-            		{lang}
-            	</li>
+              //<p>Selected Language: {this.state.selectedLanguage}</p>
+              <li 
+                style={lang === props.selectedLanguage ? {color: '#d0021b'}: null}
+                onClick={props.onSelect.bind(null, lang)}
+                key={lang}>
+                
+                {lang}
+              
+              </li>
 
 
             )
 
-	    })}
+      })}
 
-	 </ul>
+   </ul>
   )
 }
 
@@ -39,44 +40,77 @@ SelectLanguage.propTypes = {
 
 };
 
+// state
+// lifecycle events
+// ui 
+
+
 
 class Popular extends React.Component {
-	constructor (props) {
-	  super();
-	  this.state = {
-	  	selectedLanguage: 'All',
-	  };
-	  //ensures that this.updateLanguage is called in correct context, when called later (i.e., in the JSX function)
-	  this.updateLanguage = this.updateLanguage.bind(this); 
+  constructor (props) {
+    super();
+    this.state = {
+      selectedLanguage: 'All',
+      repos: null,
+    };
+    //ensures that this.updateLanguage is called in correct context, when called later (i.e., in the JSX function)
+    this.updateLanguage = this.updateLanguage.bind(this); 
 
-	}
+  }
 
-	updateLanguage(lang) {
-		this.setState(function () {
-			return {
-			  selectedLanguage: lang,
+  componentDidMount (){
+    //AJAX 
+    this.updateLanguage(this.state.selectedLanguage)
 
-			}
-		});
-	}
+  
 
-	
-	render(){
-		
-	
-		return(
-		  <div>
-		    <SelectLanguage 
-		      selectedLanguage={this.state.selectedLanguage}
-		      onSelect={this.updateLanguage} /> 
 
-		  </div>
 
-		 
-		)
-	}
+  }
+
+
+
+
+  updateLanguage(lang) {
+    this.setState(function () {
+      return {
+        selectedLanguage: lang,
+        repos: null
+
+      }
+    });
+  
+
+
+  api.fetchPopularRepos(lang).then(function(repos){
+        
+        console.log(repos)
+
+  });
+
+  }
+
+  
+
+  
+  render(){
+    
+  
+    return(
+      <div>
+        <SelectLanguage 
+          selectedLanguage={this.state.selectedLanguage}
+          onSelect={this.updateLanguage} /> 
+
+      </div>
+
+     
+    )
+  }
 
 }
 
 
 module.exports = Popular; 
+
+

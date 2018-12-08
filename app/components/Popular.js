@@ -46,22 +46,29 @@ SelectLanguage.propTypes = {
 
 
 
+
 class Popular extends React.Component {
   constructor (props) {
     super();
     this.state = {
       selectedLanguage: 'All',
-      repos: null,
+      repos: null 
     };
     //ensures that this.updateLanguage is called in correct context, when called later (i.e., in the JSX function)
     this.updateLanguage = this.updateLanguage.bind(this); 
 
   }
 
-  componentDidMount (){
+ componentDidMount (){
     //AJAX 
-    this.updateLanguage(this.state.selectedLanguage)
 
+    api.fetchPopularRepos(this.state.selectedLanguage)
+      .then(function(repos){
+        
+        console.log(repos)
+
+
+  })
   
 
 
@@ -75,22 +82,10 @@ class Popular extends React.Component {
     this.setState(function () {
       return {
         selectedLanguage: lang,
-        repos: null
 
       }
     });
-  
-
-
-  api.fetchPopularRepos(lang).then(function(repos){
-        
-        console.log(repos)
-
-  });
-
   }
-
-  
 
   
   render(){

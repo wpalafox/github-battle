@@ -36,3 +36,13 @@ li{
   cursor: pointer;
   font-size: 25px;
 }
+
+
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; 
+
+
+
+}

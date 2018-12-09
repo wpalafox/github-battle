@@ -34,6 +34,7 @@ function SelectLanguage (props){
 
 
 
+
 SelectLanguage.propTypes = {
   selectedLanguage: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
@@ -59,21 +60,10 @@ class Popular extends React.Component {
 
   }
 
- componentDidMount (){
-    //AJAX 
-
-    api.fetchPopularRepos(this.state.selectedLanguage)
-      .then(function(repos){
-        
-        console.log(repos)
-
-
-  })
-  
-
-
-
-  }
+  componentDidMount (){
+  //AJAX
+   this.updateLanguage(this.state.selectedLanguage);
+}
 
 
 
@@ -82,25 +72,42 @@ class Popular extends React.Component {
     this.setState(function () {
       return {
         selectedLanguage: lang,
+        repos: null
 
       }
     });
+
+     api.fetchPopularRepos(lang)
+      .then(function(repos) {
+
+        this.setState(function() {
+          return{
+            repos: repos
+
+          }
+
+
+        })
+
+      }.bind(this));
+    
   }
 
   
   render(){
     
-  
-    return(
-      <div>
-        <SelectLanguage 
-          selectedLanguage={this.state.selectedLanguage}
-          onSelect={this.updateLanguage} /> 
+    
+      return(
+        <div>
+          <SelectLanguage 
+            selectedLanguage={this.state.selectedLanguage}
+            onSelect={this.updateLanguage} /> 
 
-      </div>
-
-     
-    )
+           
+        
+         </div>
+       
+      )
   }
 
 }

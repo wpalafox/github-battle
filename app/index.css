@@ -29,6 +29,8 @@ li{
   list-style-type: none;
 
 }
+
+
 .languages li {
   padding: 40px;
   margin: 10px;
@@ -43,6 +45,31 @@ li{
   flex-wrap: wrap;
   justify-content: space-around; 
 
+}
 
+.popular-item{
+  margin: 20px;
+  text-align: center;
 
 }
+
+.space-list-items {
+  margin-bottm: 7px;
+  
+
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+
+}
+
+.popular-rank {
+ font-size: 20px;
+ margin: 10px;
+
+}
+
+
+

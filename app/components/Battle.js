@@ -1,4 +1,4 @@
-var React = require('require');
+var React = require('react');
 
 
 class Battle extends React.Component {

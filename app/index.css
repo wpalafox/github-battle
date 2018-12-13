@@ -11,6 +11,10 @@ body{
 
 }
 
+p{display: flex;
+  align-items: center;
+  justify-content: center;}
+
 
 .languages {
   display: flex;
